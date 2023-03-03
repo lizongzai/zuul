@@ -12,7 +12,7 @@ server:
 spring:
   application:
     # 应用名称
-    name: order-service-rest
+    name: order-service
   main:
     allow-circular-references: true
   mvc:
@@ -54,7 +54,6 @@ eureka:
     # 是否开启IP地址注册
     prefer-ip-address: true
     # 主机地址+端口号
-    #instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
   client:
     serviceUrl:

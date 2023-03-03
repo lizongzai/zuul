@@ -1,7 +1,12 @@
 package com.example.service;
 
+import com.example.fallback.ProductServiceFallbackFactory;
 import com.example.pojo.Product;
 import java.util.List;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 功能描述: 调用服务生产者的微服务名称,例如：service-provider
@@ -10,6 +15,7 @@ import java.util.List;
  * @date 2023/02/27 11:50
  * @since 1.0.0
  */
+@FeignClient(value = "product-service", fallbackFactory = ProductServiceFallbackFactory.class)
 public interface IProductService {
 
   /**
@@ -18,6 +24,7 @@ public interface IProductService {
    * @return
    */
   //配置需要调用的微服务地址和参数
+  @GetMapping("/product/list")
   List<Product> selectProductList();
 
   /**
@@ -26,7 +33,8 @@ public interface IProductService {
    * @param ids
    * @return
    */
-  List<Product> selectProductListByIds(List<Integer> ids);
+  @GetMapping("/product/listByIds")
+  List<Product> selectProductListByIds(@RequestParam("id") List<Integer> ids);
 
 
   /**
@@ -35,7 +43,8 @@ public interface IProductService {
    * @param id
    * @return
    */
-  Product selectProductById(Integer id);
+  @GetMapping("/product/{id}")
+  Product selectProductById(@PathVariable Integer id);
 
 
 }
