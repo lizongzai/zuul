@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * 功能描述: 调用服务生产者的微服务名称,例如：service-provider
+ * 功能描述: 调用服务生产者的微服务名称,例如：product-service
  *
  * @author lizongzai
  * @date 2023/02/27 11:50
