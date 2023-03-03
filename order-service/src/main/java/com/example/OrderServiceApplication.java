@@ -1,7 +1,5 @@
 package com.example;
 
-import com.alibaba.cloud.sentinel.annotation.SentinelRestTemplate;
-import com.example.config.ExceptionUtil;
 import com.netflix.loadbalancer.RandomRule;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -31,8 +29,6 @@ public class OrderServiceApplication {
 
   @Bean
   @LoadBalanced
-  @SentinelRestTemplate(blockHandler = "handleException", blockHandlerClass = ExceptionUtil.class,
-      fallback = "fallback", fallbackClass = ExceptionUtil.class)
   public RestTemplate restTemplate() {
     return new RestTemplate();
   }
