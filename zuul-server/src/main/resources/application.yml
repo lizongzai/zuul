@@ -23,6 +23,8 @@ eureka:
 
 # 路由规则
 zuul:
+  #ignored-patterns: /**/order/**  # URL 地址排除，排除所有包含 /order/ 的路径
+  # 不受路由排除影响
   routes:
     product-service:              # 路由 id 自定义
       path: /product-service/**   # 配置请求 url 的映射路径
@@ -32,3 +34,5 @@ zuul:
       path: /order-service/**
       url: http://localhost:9091/
       serviceId: order-service  # 根据 serviceId 自动从注册中心获取服务地址并转发请求
+  # 路由前缀
+  #prefix: api
