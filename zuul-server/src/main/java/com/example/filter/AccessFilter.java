@@ -39,8 +39,7 @@ public class AccessFilter extends ZuulFilter {
     public Object run() throws ZuulException {
 
         // 模拟异常
-        Integer.parseInt("zuul");
-
+        //Integer.parseInt("zuul");
 
         // 获取请求上下文
         RequestContext rc = RequestContext.getCurrentContext();
