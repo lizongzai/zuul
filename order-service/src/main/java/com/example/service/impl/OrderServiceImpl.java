@@ -11,9 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * <p>
@@ -31,12 +29,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
   @Resource
   private OrderMapper orderMapper;
   @Autowired
-  @Resource
-  private RestTemplate restTemplate;
-  @Autowired
   private IProductService productService;
-  @Autowired
-  private LoadBalancerClient loadBalancerClient; //Ribbon负载均衡器
+
 
   /**
    * 根据主键查询订单-->调用商品服务/product/list
