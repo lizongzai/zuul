@@ -7,7 +7,7 @@ server:
     mime-types: application/json,application/xml,text/html,text/html,text/plain
   tomcat:
     threads:
-      max: 10 # 降低最大线程数方便模拟测试
+      max: 100 # 降低最大线程数方便模拟测试
 
 spring:
   application:

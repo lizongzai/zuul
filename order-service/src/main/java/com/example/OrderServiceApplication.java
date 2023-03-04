@@ -12,19 +12,19 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-@EnableHystrixDashboard // 开启数据监控注解
-@EnableHystrix  // 开启熔断器注解 2 选 1，@EnableHystrix 封装了 @EnableCircuitBreaker
-@EnableTurbine // 开启数据监控注解
+//@EnableHystrixDashboard // 开启数据监控注解
+//@EnableHystrix  // 开启熔断器注解 2 选 1，@EnableHystrix 封装了 @EnableCircuitBreaker
+//@EnableTurbine // 开启数据监控注解
 @SpringBootApplication
 @EnableFeignClients
 @MapperScan("com.example.mapper")
 public class OrderServiceApplication {
 
   //  @Bean
-//  public Logger.Level getLog() {
-//    return Level.FULL;
-//  }
-//
+  //  public Logger.Level getLog() {
+  //    return Level.FULL;
+  //  }
+
   @Bean
   public RandomRule randomRule() {
     return new RandomRule();
