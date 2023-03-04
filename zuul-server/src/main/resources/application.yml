@@ -27,3 +27,8 @@ zuul:
     product-service:              # 路由 id 自定义
       path: /product-service/**   # 配置请求 url 的映射路径
       url: http://localhost:9090/ # 映射路径对应的微服务地址
+      serviceId: product-service  # 根据 serviceId 自动从注册中心获取服务地址并转发请求
+    order-service:
+      path: /order-service/**
+      url: http://localhost:9091/
+      serviceId: order-service  # 根据 serviceId 自动从注册中心获取服务地址并转发请求
