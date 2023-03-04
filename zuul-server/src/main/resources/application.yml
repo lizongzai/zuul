@@ -36,3 +36,7 @@ zuul:
       path: /order-service/**
       url: http://localhost:9091/
       serviceId: order-service  # 根据 serviceId 自动从注册中心获取服务地址并转发请求
+  # 禁用 Zuul 默认的异常处理 filter
+  SendErrorFilter:
+    error:
+      disable: true
