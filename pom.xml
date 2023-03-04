@@ -8,8 +8,8 @@
   <modules>
     <module>eureka-server01</module>
     <module>eureka-server02</module>
-    <module>produdct-service</module>
     <module>order-service</module>
+    <module>product-service</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -20,7 +20,7 @@
   <parent>
     <artifactId>spring-boot-starter-parent</artifactId>
     <groupId>org.springframework.boot</groupId>
-    <version>2.7.9</version>
+    <version>2.3.4.RELEASE</version>
   </parent>
 
   <properties>
@@ -29,11 +29,11 @@
     <!--jdk 版本号-->
     <java.version>11</java.version>
     <!--spring cloud 版本号-->
-    <spring-cloud.version>2021.0.6</spring-cloud.version>
+    <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
     <!--spring boot 版本号-->
-    <spring-boot.version>2.7.9</spring-boot.version>
+    <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
     <!--spring-cloud-alibaba.version 版本号-->
-    <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
+    <spring-cloud-alibaba.version>2.1.0.RELEASE</spring-cloud-alibaba.version>
   </properties>
 
   <dependencyManagement>
