@@ -6,6 +6,7 @@ spring:
     # 应用名称(集群内相同)
     name: product-service
   main:
+    # 循环依赖限制
     allow-circular-references: true
   mvc:
     pathmatch:
