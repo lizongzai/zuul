@@ -10,6 +10,7 @@
         <module name="zuul-server" />
         <module name="product-service" />
         <module name="eureka-server01" />
+        <module name="zuul-server-sentinel" />
         <module name="eureka-server02" />
         <module name="order-service" />
       </profile>
@@ -27,6 +28,7 @@
       <module name="produdct-service" options="-parameters" />
       <module name="zuul" options="" />
       <module name="zuul-server" options="-parameters" />
+      <module name="zuul-server-sentinel" options="-parameters" />
     </option>
   </component>
 </project>

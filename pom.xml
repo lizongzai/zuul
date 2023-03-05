@@ -10,6 +10,7 @@
     <module>eureka-server02</module>
     <module>order-service</module>
     <module>product-service</module>
+    <module>zuul-server-sentinel</module>
   </modules>
   <packaging>pom</packaging>
 

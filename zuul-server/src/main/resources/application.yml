@@ -53,7 +53,7 @@ zuul:
           - url
           - user
   # 路由前缀
-  prefix: /api
+  #prefix: /api
   #ignored-patterns: /**/order/**  # URL 地址排除，排除所有包含 /order/ 的路径
   # 不受路由排除影响
   routes:
