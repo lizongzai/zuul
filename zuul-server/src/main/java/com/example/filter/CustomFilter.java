@@ -16,9 +16,9 @@ import org.springframework.stereotype.Component;
  * @since 1.0.0
  */
 @Component
-public class CustomZuulFilter extends ZuulFilter {
+public class CustomFilter extends ZuulFilter {
 
-  private static final Logger logger = LoggerFactory.getLogger(CustomZuulFilter.class);
+  private static final Logger logger = LoggerFactory.getLogger(CustomFilter.class);
 
   /**
    * 过滤器类型 pre routing post error
