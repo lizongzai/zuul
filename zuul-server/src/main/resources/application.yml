@@ -36,6 +36,8 @@ eureka:
 
 # 路由规则
 zuul:
+  # 开启 Zuul 网关重试
+  retryable: true
   # 服务限流
   ratelimit:
     # 开启限流保护
@@ -44,8 +46,8 @@ zuul:
     repository: REDIS
     # default-policy-list 默认配置，全局生效
     default-policy-list:
-      - limit: 3
-        refresh-interval: 60    # 60s 内请求超过 3 次，服务端就抛出异常，60s 后可以恢复正常请求
+      - limit: 5
+        refresh-interval: 60    # 60s 内请求超过 5 次，服务端就抛出异常，60s 后可以恢复正常请求
         type:
           - origin
           - url
@@ -78,3 +80,20 @@ management:
 hystrix:
   dashboard:
     proxy-stream-allow-list: "localhost"
+  # Hystrix 超时时间设置
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000  # 线程池隔离，默认超时时间 1000ms
+
+# Ribbon 超时时间设置：建议设置小于 Hystrix
+ribbon:
+  ConnectTimeout: 5000                    # 请求连接的超时时间: 默认超时时间 1000ms
+  ReadTimeout: 5000                       # 请求处理的超时时间: 默认超时时间 1000ms
+  # 重试次数
+  MaxAutoRetries: 1                       # MaxAutoRetries 表示访问服务集群下原节点（同路径访问）
+  MaxAutoRetriesNextServer: 1             # MaxAutoRetriesNextServer表示访问服务集群下其余节点（换台服务器）
+  # Ribbon 开启重试
+  OkToRetryOnAllOperations: true

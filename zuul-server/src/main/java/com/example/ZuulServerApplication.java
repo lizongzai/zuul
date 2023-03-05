@@ -9,7 +9,9 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.cloud.netflix.zuul.EnableZuulServer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.retry.annotation.EnableRetry;
 
+@EnableRetry
 @EnableHystrix
 @EnableHystrixDashboard
 @EnableZuulProxy
@@ -17,7 +19,7 @@ import org.springframework.context.annotation.Bean;
 public class ZuulServerApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(ZuulServerApplication.class,args);
+    SpringApplication.run(ZuulServerApplication.class, args);
   }
 
 }
