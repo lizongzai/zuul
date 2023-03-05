@@ -3,8 +3,10 @@ package com.example.filter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cloud.netflix.zuul.util.ZuulRuntimeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +14,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * 异常过滤器
+ * 功能描述: 异常过滤器
+ *
+ * @author lizongzai
+ * @date 2023/03/05 15:16
+ * @since 1.0.0
  */
 @Component
 public class ErrorFilter extends ZuulFilter {
@@ -36,26 +42,53 @@ public class ErrorFilter extends ZuulFilter {
 
   @Override
   public Object run() throws ZuulException {
+
     RequestContext rc = RequestContext.getCurrentContext();
-    Throwable throwable = rc.getThrowable();
-    logger.error("ErrorFilter..." + throwable.getCause().getMessage(), throwable);
-    // 响应状态码，HTTP 500 服务器错误
-    rc.setResponseStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+    ZuulException exception = this.findZuulException(rc.getThrowable());
+    logger.error("ErrorFilter..." + exception.errorCause, exception);
+
+    HttpStatus httpStatus = null;
+    if (429 == exception.nStatusCode) {
+      httpStatus = HttpStatus.TOO_MANY_REQUESTS;
+    }
+
+    if (500 == exception.nStatusCode) {
+      httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+    }
+
+    // 响应状态码
+    rc.setResponseStatusCode(httpStatus.value());
     // 响应类型
     rc.getResponse().setContentType("application/json; charset=utf-8");
     PrintWriter writer = null;
     try {
       writer = rc.getResponse().getWriter();
       // 响应内容
-      writer.print("{\"message\":\"" + HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase() + "\"}");
+      writer.print("{\"message\":\"" + httpStatus.getReasonPhrase() + "\"}");
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
-        if (null != writer) {
-            writer.close();
-        }
+      if (null != writer) {
+        writer.close();
+      }
     }
     return null;
+  }
+
+  private ZuulException findZuulException(Throwable throwable) {
+    if (throwable.getCause() instanceof ZuulRuntimeException) {
+      return (ZuulException) throwable.getCause().getCause();
+    }
+
+    if (throwable.getCause() instanceof ZuulException) {
+      return (ZuulException) throwable.getCause();
+    }
+
+    if (throwable instanceof ZuulException) {
+      return (ZuulException) throwable;
+    }
+
+    return new ZuulException(throwable, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, null);
   }
 
 }

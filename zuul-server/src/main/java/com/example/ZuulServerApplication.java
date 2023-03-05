@@ -20,14 +20,4 @@ public class ZuulServerApplication {
     SpringApplication.run(ZuulServerApplication.class,args);
   }
 
-  @Bean
-  public ServletRegistrationBean getServlet() {
-    HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
-    ServletRegistrationBean registrationBean = new ServletRegistrationBean(streamServlet);
-    registrationBean.setLoadOnStartup(1);
-    registrationBean.addUrlMappings("/actuator/hystrix.stream");//访问路径
-    registrationBean.setName("hystrix.stream");
-    return registrationBean;
-  }
-
 }
